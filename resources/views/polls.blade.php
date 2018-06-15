@@ -6,9 +6,11 @@
     @foreach($polls as $poll)
 
         <h1><a href="{{action("PollController@show", ["id" => $poll->id])}}">{{$poll->name}}</a></h1>
-        <h1>{{$poll->description}}</h1>
+        <p>{{$poll->description}}</p>
+________________________________________________________________________________
+
 
     @endforeach
-
+    {{ $polls->render() }}
 @endsection
 

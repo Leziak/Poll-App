@@ -45,6 +45,8 @@
         <h1>You already voted!</h1>
     @endif
 
+    <a class="btn btn-primary text-center" href="{{route("polls")}}">GO BACK TO POLLS</a>
+
 
 
 

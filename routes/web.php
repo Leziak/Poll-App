@@ -15,11 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/polls', 'PollController@index');
+Route::get('/polls', 'PollController@index')->name("polls");
 
-Route::get("/polls/create", "PollController@create");
+Route::get("/polls/create", "PollController@create")->name("create")->middleware("auth");
 
-Route::get("/polls/edit/{id?}", "PollController@edit");
+Route::get("/polls/edit/{id?}", "PollController@edit")->middleware("auth");
 
 Route::post("/polls", "PollController@store");
 
@@ -27,7 +27,7 @@ Route::get("/polls/{id}", "PollController@show");
 
 Route::get("/manage/polls/{id?}", "PollController@manage")->name("poll manager")->middleware("auth");
 
-Route::post('/polls/vote/{id}', 'PollController@vote');
+Route::post('/polls/vote/{id}', 'PollController@vote')->middleware("auth");
 
 
 Route::post("/polls/{id}", "PollController@update");

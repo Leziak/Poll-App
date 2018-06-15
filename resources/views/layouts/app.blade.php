@@ -80,6 +80,7 @@
             @yield('polls')
 
             @yield("update")
+            <a class="btn btn-primary text-center" href="{{route("create")}}">CREATE NEW POLL</a>
         </main>
     </div>
 

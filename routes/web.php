@@ -32,3 +32,5 @@ Route::post("/polls/{id}", "PollController@update");
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('/polls', 'PollController@vote');

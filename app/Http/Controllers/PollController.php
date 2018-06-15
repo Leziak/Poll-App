@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use \App\Poll;
 use \App\Option;
 use Illuminate\Http\Request;
+use function Sodium\increment;
 
 
 class PollController extends Controller
@@ -46,6 +47,7 @@ class PollController extends Controller
             "name" => "required | min:6",
             "choices" => "required",
             "description" => "required",
+            'type' => 'required'
         ]);
 
         $poll = Poll::create([
@@ -69,6 +71,26 @@ class PollController extends Controller
         return redirect()->action("PollController@show", ["id" => $poll->id]); 
 
     
+    }
+
+    public function vote(Request $request)
+    {
+
+        $options = $request->all()['option'];
+
+        foreach($options as $id){
+            $option = Option::find($id);
+
+            $option->update ([
+                'count' => ((int)'string' + 1)
+            ]);
+
+        }
+
+
+        session()->flash('success_message', 'Success!');
+        return redirect()->back();
+        return redirect()->action("PollController@show", ["id" => $poll->id]);
     }
 
     /**
@@ -141,5 +163,7 @@ class PollController extends Controller
     {
         //
     }
+
+
 
 }

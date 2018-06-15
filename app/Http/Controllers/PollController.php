@@ -13,10 +13,7 @@ class PollController extends Controller
      */
     public function index()
     {
-
-
-
-        return view('po')
+        return 'hello';
     }
 
     /**

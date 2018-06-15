@@ -16,3 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/polls', 'PollController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

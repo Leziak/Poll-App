@@ -16,7 +16,7 @@ class CreateVotedTable extends Migration
         Schema::create('voted', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
-            $table->string('poll_code');
+            $table->integer('poll_id');
             $table->integer('voted');
             $table->timestamps();
         });

@@ -19,6 +19,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 </head>
 <body>
     <div id="app">
@@ -73,6 +74,7 @@
 
         <main class="py-4">
             @yield('content')
+            @yield('polls')
         </main>
     </div>
 </body>

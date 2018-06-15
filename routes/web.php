@@ -27,10 +27,12 @@ Route::get("/polls/{id}", "PollController@show");
 
 Route::get("/manage/polls/{id?}", "PollController@manage")->name("poll manager")->middleware("auth");
 
+Route::post('/polls/vote', 'PollController@vote');
+
+
 Route::post("/polls/{id}", "PollController@update");
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/polls/vote', 'PollController@vote');

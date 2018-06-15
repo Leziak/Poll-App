@@ -5,6 +5,11 @@
     <p>{{$poll->description}}</p>
 
 
+    @foreach($options as $option)
+
+        <h1>{{$option->option}}: {{$option->count}}</h1>
+
+    @endforeach
 
 
 

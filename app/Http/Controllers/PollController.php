@@ -75,14 +75,14 @@ class PollController extends Controller
 
     public function vote(Request $request)
     {
-        $poll = Poll::find($id);
-        $options = $request->all()['option'];
 
+        $options = $request->all()['option'];
+//dd($options);
         foreach($options as $id){
             $option = Option::find($id);
-
+//dd($option);
             $option->update ([
-                'count' => ((int)'string' + 1)
+                'count' => $option->count + 1
             ]);
 
         }
@@ -90,7 +90,6 @@ class PollController extends Controller
 
         session()->flash('success_message', 'Success!');
         return redirect()->back();
-        return redirect()->action("PollController@show", ["id" => $poll->id]);
     }
 
     /**

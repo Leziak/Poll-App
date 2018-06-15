@@ -25,6 +25,8 @@ Route::post("/polls", "PollController@store");
 
 Route::get("/polls/{id}", "PollController@show");
 
+Route::get("/manage/polls/{id?}", "PollController@manage")->name("poll manager")->middleware("auth");
+
 Route::post("/polls/{id}", "PollController@update");
 
 Auth::routes();

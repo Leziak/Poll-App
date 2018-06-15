@@ -72,9 +72,13 @@
             </div>
         </nav>
 
+
         <main class="py-4">
+            @yield("show")
+            @yield("create")
             @yield('content')
             @yield('polls')
+            @yield("update")
         </main>
     </div>
 </body>

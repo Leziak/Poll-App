@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('create')
+@section('update')
 
     @include('common/errors')
 
@@ -17,13 +17,13 @@
         </div>
 
         <div class="form-group">
-            {!! Form::label('text', 'Text of the pool', ['class' => 'control-label']) !!}
-            {!! Form::textarea('text', $poll->description, ['class' => 'form-control']) !!}
+            {!! Form::label('description', 'Text of the pool', ['class' => 'control-label']) !!}
+            {!! Form::textarea('description', $poll->description, ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">
-            {!! Form::label('text', 'Number of options', ['class' => 'control-label']) !!}
-            {!! Form::number('text', $poll->choices, ['class' => 'form-control']) !!}
+            {!! Form::label('choices', 'Number of options', ['class' => 'control-label']) !!}
+            {!! Form::number('choices', $poll->choices, ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">

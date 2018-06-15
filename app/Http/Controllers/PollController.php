@@ -38,11 +38,11 @@ class PollController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         $this->validate($request, [
             "name" => "required | min:6",
-            "choices" => "required | min:2",
+            "choices" => "required",
             "description" => "required",
         ]);
 
@@ -83,7 +83,7 @@ class PollController extends Controller
     public function edit($id)
     {
         $poll = Poll::findOrFail($id);
-        $view = view("edit");
+        $view = view("update");
         $view->poll = $poll;
         return $view;
     }
@@ -99,12 +99,18 @@ class PollController extends Controller
     {
         $poll = Poll::find($id);
        
+        $this->validate($request, [
+            "name" => "required | min:6",
+            "choices" => "required",
+            "description" => "required",
+        ]);
 
-        $poll = Poll::update([
+        $poll->update ([
             "name" => $request->input("name"),
             "choices" => $request->input("choices"),
             "description" => $request->input("description"),
         ]);
+     
 
         session()->flash('success_message', 'Success!');
  

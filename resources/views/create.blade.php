@@ -3,8 +3,7 @@
 @section('create')
 
     @include('common/errors')
-
-    <form action="{{ action('PollController@store') }}" method="post">
+<form action="{{ action('PollController@store') }}" method="post">
 
         {{ csrf_field() }}
 
@@ -17,13 +16,17 @@
         </div>
 
         <div class="form-group">
-            {!! Form::label('text', 'Text of the pool', ['class' => 'control-label']) !!}
-            {!! Form::textarea('text', null, ['class' => 'form-control']) !!}
+            {!! Form::label('description', 'Text of the pool', ['class' => 'control-label']) !!}
+            {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">
-            {!! Form::label('text', 'Number of options', ['class' => 'control-label']) !!}
-            {!! Form::number('text', null, ['class' => 'form-control']) !!}
+            {!! Form::label('choices', 'Number of options', ['class' => 'control-label']) !!}
+            {!! Form::number('choices', null, ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::radio("type", "radio") !!}
+            {!! Form::radio("type", "checkbox") !!}
         </div>
 
         <div class="form-group">

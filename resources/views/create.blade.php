@@ -12,12 +12,12 @@
             {{--@if($errors->has('title'))--}}
                 {{--THIS FIELD HAS ERRORS:--}}
             {{--@endif--}}
-            {!! Form::label('name', 'Name of the pool', ['class' => 'control-label']) !!}
+            {!! Form::label('name', 'Name of the poll', ['class' => 'control-label']) !!}
             {!! Form::text('name', null,  ['class' => 'form-control']) !!}
         </div>
 
         <div class="form-group">
-            {!! Form::label('text', 'Text of the pool', ['class' => 'control-label']) !!}
+            {!! Form::label('text', 'Text of the poll', ['class' => 'control-label']) !!}
             {!! Form::textarea('text', null, ['class' => 'form-control']) !!}
         </div>
 

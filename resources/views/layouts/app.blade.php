@@ -75,6 +75,7 @@
         <main class="py-4">
             @yield('content')
             @yield('polls')
+            @yield('create')
         </main>
     </div>
 </body>

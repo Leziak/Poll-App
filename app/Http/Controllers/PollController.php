@@ -13,7 +13,7 @@ class PollController extends Controller
      */
     public function index()
     {
-        $polls = Poll::paginate(5);
+        $polls = Poll::get();
         $view = view("polls");
         $view->polls = $polls;
         return $view;

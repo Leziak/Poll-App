@@ -4,7 +4,7 @@
 
     @include('common/errors')
 
-    <form action="{{ action('PollController@store' }}" method="post">
+    <form action="{{ action('PollController@store') }}" method="post">
 
         {{ csrf_field() }}
 

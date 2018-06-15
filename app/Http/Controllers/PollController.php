@@ -75,7 +75,7 @@ class PollController extends Controller
 
     public function vote(Request $request)
     {
-
+        $poll = Poll::find($id);
         $options = $request->all()['option'];
 
         foreach($options as $id){

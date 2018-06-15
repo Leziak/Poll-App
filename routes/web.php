@@ -33,4 +33,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/polls', 'PollController@vote');
+Route::post('/polls/vote', 'PollController@vote');

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use \App\Poll;
+use \App\Option;
 use Illuminate\Http\Request;
+
 
 class PollController extends Controller
 {
@@ -13,7 +15,7 @@ class PollController extends Controller
      */
     public function index()
     {
-        $polls = Poll::get();
+        $polls = Poll::paginate(5);
         $view = view("polls");
         $view->polls = $polls;
         return $view;
@@ -53,6 +55,15 @@ class PollController extends Controller
             "code" => uniqid(),
         ]);
 
+        for($i=1;$i<=$poll->choices;$i++){
+            $option = Option::create([
+                "poll_id" => $poll->id,
+                "count" => 0,
+                "option" => $request->input("option{$i}"),
+                "type" => $request->input("type") == "radio" ? 0 : 1,
+            ]);
+        }
+
         session()->flash('success_message', 'Success!');
  
         return redirect()->action("PollController@show", ["id" => $poll->id]); 
@@ -68,9 +79,12 @@ class PollController extends Controller
      */
     public function show($id)
     {
+        
         $poll = Poll::find($id);
+        $options = Option::where("poll_id", "=", $id)->get();
         $view = view("show");
         $view->poll = $poll;
+        $view->options = $options;
         return $view;
     }
 
@@ -127,4 +141,5 @@ class PollController extends Controller
     {
         //
     }
+
 }

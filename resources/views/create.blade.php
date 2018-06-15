@@ -17,8 +17,8 @@
 
         <div class="form-group">
 
-            {!! Form::label('text', 'Text of the poll', ['class' => 'control-label']) !!}
-            {!! Form::textarea('text', null, ['class' => 'form-control']) !!}
+            {!! Form::label('description', 'Text of the poll', ['class' => 'control-label']) !!}
+            {!! Form::textarea('description', null, ['class' => 'form-control']) !!}
 
         </div>
 
@@ -31,8 +31,8 @@
 
 
         <div class="form-group">
-            Radio: {!! Form::radio("type", "radio") !!}<br>
-            Checkbox: {!! Form::radio("type", "checkbox") !!}
+            Single choice: {!! Form::radio("type", "radio") !!}<br>
+            Multiple choice: {!! Form::radio("type", "checkbox") !!}
         </div>
 
         <div class="form-group" id="names">

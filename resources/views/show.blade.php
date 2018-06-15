@@ -4,12 +4,16 @@
     <h1>{{$poll->name}}</h1>
     <p>{{$poll->description}}</p>
 
+    @if(!$show_form)
+
 
     @foreach($options as $option)
 
         <h1>{{$option->option}}: {{$option->count}}</h1>
 
     @endforeach
+
+    @endif
 
 
 

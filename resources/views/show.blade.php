@@ -7,4 +7,6 @@
 {{$poll->choices}}
 
 
+
+
 @endsection;

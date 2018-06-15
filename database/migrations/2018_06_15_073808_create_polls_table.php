@@ -24,6 +24,7 @@ class CreatePollsTable extends Migration
             $table->integer('choices');
             $table->string('name');
             $table->text('description');
+            $table->boolean('type');
             $table->timestamps();
         });
     }

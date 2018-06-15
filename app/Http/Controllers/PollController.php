@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Poll;
 use Illuminate\Http\Request;
 
 class PollController extends Controller
@@ -13,7 +13,10 @@ class PollController extends Controller
      */
     public function index()
     {
-        return 'hello';
+        $polls = Poll::paginate(5);
+        $view = view("polls");
+        $view->polls = $polls;
+        return $view;
     }
 
     /**
@@ -23,7 +26,10 @@ class PollController extends Controller
      */
     public function create()
     {
-        //
+        $poll = new Poll();
+        $view = view("create");
+        $view->poll = $poll;
+        return $view;
     }
 
     /**
@@ -32,9 +38,26 @@ class PollController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            "name" => "required | min:6",
+            "choices" => "required | min:2",
+            "description" => "required",
+        ]);
+
+        $poll = Poll::create([
+            "name" => $request->input("name"),
+            "choices" => $request->input("choices"),
+            "description" => $request->input("description"),
+            "code" => uniqid(),
+        ]);
+
+        session()->flash('success_message', 'Success!');
+ 
+        return redirect()->action("PollController@show", ["id" => $poll->id]); 
+
+    
     }
 
     /**
@@ -45,7 +68,10 @@ class PollController extends Controller
      */
     public function show($id)
     {
-        //
+        $poll = Poll::find($id);
+        $view = view("show");
+        $view->poll = $poll;
+        return $view;
     }
 
     /**
@@ -56,7 +82,10 @@ class PollController extends Controller
      */
     public function edit($id)
     {
-        //
+        $poll = Poll::findOrFail($id);
+        $view = view("edit");
+        $view->poll = $poll;
+        return $view;
     }
 
     /**
@@ -68,7 +97,18 @@ class PollController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $poll = Poll::find($id);
+       
+
+        $poll = Poll::update([
+            "name" => $request->input("name"),
+            "choices" => $request->input("choices"),
+            "description" => $request->input("description"),
+        ]);
+
+        session()->flash('success_message', 'Success!');
+ 
+        return redirect()->action("PollController@show", ["id" => $poll->id]); 
     }
 
     /**

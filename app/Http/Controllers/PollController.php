@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 use \App\Poll;
 use \App\Option;
 use Illuminate\Http\Request;
-use function Sodium\increment;
+use Auth;
+use \App\Voted;
 
 
 class PollController extends Controller
@@ -73,19 +74,30 @@ class PollController extends Controller
     
     }
 
-    public function vote(Request $request)
+    public function vote(Request $request, $id)
     {
 
+
+//        dd($id);
         $options = $request->all()['option'];
 //dd($options);
-        foreach($options as $id){
-            $option = Option::find($id);
+        foreach($options as $option_id){
+            $option = Option::find($option_id);
 //dd($option);
             $option->update ([
                 'count' => $option->count + 1
             ]);
 
         }
+        $voted = Voted::create([
+            "user_id" => Auth::id(),
+            "poll_id" => $id,
+            "voted" => 1
+        ]);
+
+        $size = count(Voted::where('poll_id', '=', $voted->poll_id)->where('user_id', '=', $voted->user_id)->get());
+
+
 
 
         session()->flash('success_message', 'Success!');
@@ -100,12 +112,19 @@ class PollController extends Controller
      */
     public function show($id)
     {
-        
         $poll = Poll::find($id);
         $options = Option::where("poll_id", "=", $id)->get();
         $view = view("show");
         $view->poll = $poll;
         $view->options = $options;
+        $view->user = Auth::id();
+        $size = count(Voted::where('poll_id', '=', $poll->id)->where('user_id', '=', Auth::id())->get());
+        if($size<1){
+            $show_form = true;
+        } else {
+            $show_form = false;
+        }
+        $view->show_form = $show_form;
         return $view;
     }
 

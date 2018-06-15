@@ -13,7 +13,9 @@
 
 
 
-    <form action="{{ action('PollController@vote') }}" method="post">
+    @if($show_form)
+
+    <form action="{{ action('PollController@vote', ['id' => $poll->id]) }}" method="post">
 
         {{ csrf_field() }}
 
@@ -34,6 +36,10 @@
             {!! Form::submit('Vote') !!}
         </div>
     </form>
+
+    @else
+        <h1>You already voted!</h1>
+    @endif
 
 
 
